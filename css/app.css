@@ -1,0 +1,264 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    font-family: 'Coda', cursive;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1 {
+    font-family: cursive;
+    font-weight: 300;
+	text-shadow: 2px 0 0px #800040, 3px 2px 0px rgba(77,0,38,0.5), 3px 0 3px #FF002B, 5px 0 3px #800015, 6px 2px 3px rgba(77,0,13,0.5), 6px 0 9px #FF5500, 8px 0 9px #802A00, 9px 2px 9px rgba(77,25,0,0.5), 9px 0 18px #FFD500, 11px 0 18px #806A00, 12px 2px 18px rgba(77,66,0,0.5), 12px 0 30px #D4FF00, 14px 0 30px #6A8000, 15px 2px 30px rgba(64,77,0,0.5), 15px 0 45px #80FF00, 17px 0 45px #408000, 17px 2px 45px rgba(38,77,0,0.5), 2px 2px 2px rgba(54,16,140,0);
+}
+
+/*
+ * Styles for the deck of cards
+ */
+
+.deck {
+    width: 660px;
+    min-height: 680px;
+    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 3em;
+}
+
+.deck .card {
+    height: 125px;
+    width: 125px;
+    background: #2e3d49;
+    font-size: 0;
+    color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+}
+
+.deck .card.open {
+    transform: rotate(0);
+    background: #02b3e4;
+    cursor: default;
+	animation-delay: 100ms;
+
+}
+
+.deck .card.show {
+    font-size: 33px;
+}
+
+.deck .card.match {
+    cursor: default;
+    background: #02ccba;
+    font-size: 33px;
+}
+
+/*
+ * Animation if cards are not matches
+ */
+.deck .card.wrong {
+	animation-name: slide;
+	animation-duration: 150ms;
+	animation-iteration-count: 1;
+}
+
+@keyframes slide {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(20deg); }
+  /*from {background-color: #2e3d49;}
+  to {background-color: yellow;}*/
+}
+
+/*
+ * Styles for the Score Panel
+ */
+
+.score-panel {
+    text-align: left;
+    width: 345px;
+    margin-bottom: 10px;
+	font-family: cursive;
+}
+
+.score-panel .stars {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    margin: 0 5px 0 0;
+}
+
+.score-panel .stars li {
+    list-style: none;
+    display: inline-block;
+
+}
+
+.checked {
+  color: orange;
+}
+
+.modal-content #winningMessage .stars li {
+    list-style: none;
+    display: inline-block;
+}
+
+.modal-content #winningMessage .stars{
+    display: inline-block;
+	text-align: center;
+	margin: 0px;
+	padding-inline-start: 6px;
+}
+
+.score-panel .timer {
+	position: relative;
+    display: inline-block;
+	margin-left: 75px;
+}
+
+.score-panel .restart {
+    float: right;
+    cursor: pointer;
+}
+
+
+
+/* The Modal (background) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  text-align: center;
+  background:  linear-gradient(135deg, rgba(3,171,132,1) 0%, rgba(2,141,108,1) 44%, rgba(1,14,11,1) 100%);
+  margin: 20% auto; /* 20% from the top and centered */
+  padding: 20px;
+  width: 30%;
+  border-radius: 20px;
+  box-shadow: 0px 0px 18px 14px rgba(240,218,240,1);
+}
+
+
+/* The Close Button */
+.modal-content button {
+  font-weight: bold;
+  text-align: center;
+	box-shadow: 0px 10px 14px -7px #276873;
+	background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
+	background-color:#599bb3;
+	cursor:pointer;
+	font-family:Arial;
+	font-weight:bold;
+	text-decoration:none;
+	border-radius: 7px;
+	text-shadow:0px 1px 0px #3d768a;
+}
+
+button:hover,
+button:focus {
+  background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+  background-color:#408c99;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#winningMessage {
+	text-align: center;
+}
+
+
+/* Responsive display */
+@media screen and (max-width: 390px) {
+    .deck {
+        width: 260px;
+		min-height: 280px;
+		padding: 15px;
+    }
+
+	.deck .card{
+        width: 50px;
+		height: 50px;
+    }
+
+	.score-panel{
+		width: 240px;
+	}
+
+	.score-panel .timer{
+		margin-left: 4px;
+	}
+}
+
+@media screen and (min-width: 391px) and (max-width: 480px) {
+    .deck {
+        width: 350px;
+		min-height: 360px;
+		padding: 20px;
+    }
+
+	.deck .card{
+        width: 65px;
+		height: 65px;
+    }
+
+    .score-panel .timer {
+    margin-left: 50px;
+    }
+
+	.score-panel{
+		width: 300px;
+	}
+}
+
+@media screen and (min-width: 481px) and (max-width: 800px){
+    .deck {
+        width: 460px;
+		min-height: 480px;
+		padding: 20px;
+    }
+
+	.deck .card{
+        width: 90px;
+		height: 90px;
+    }
+
+}
